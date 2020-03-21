@@ -5,14 +5,14 @@
 - Attach igw to routing table
 - Attach routing table to both subnets 
 
-<br/>
+<br/><br/>
 - Create an EC2 instance in each subnet
 - Create a security group and attach it to both EC2 instances
   - Allow incoming traffic for port 22 and 80, any host / cidr block
   - Allow All outgoing traffic
   - restrict security group port 80 traffic from elb only
   
-<br/>
+<br/><br/>
 - Create a Loadbalancer (with own security group)
 - Add both instances to loadbalancer
 
