@@ -11,6 +11,9 @@
   - Allow incoming traffic for port 22 and 80, any host / cidr block
   - Allow All outgoing traffic
   - restrict security group port 80 traffic from elb only
+- setup provisioner
+  - get web files from s3 bucket
+  - push web logs to s3 bucket
   
 <br/><br/>
 - Create a Loadbalancer (with own security group)
