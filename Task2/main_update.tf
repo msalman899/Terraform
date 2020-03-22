@@ -161,7 +161,7 @@ resource "aws_security_group" "webserver_sg" {
 ## Load balancer ##
 
 resource "aws_elb" "webserver_elb" {
-  name = "webserver elb"
+  name = "webserver-elb"
   subnets = [aws_subnet.my-subnet1.id,aws_subnet.my-subnet2.id]
   security_groups = [aws_security_group.elb_sg.id]
   instances = [aws_instance.nginx_server1.id, aws_instance.nginx_server2.id]
@@ -250,5 +250,5 @@ resource "aws_instance" "nginx_server2" {
 ###########
 
 output "aws_elb_public_dns" {
-  value = aws_elb.webserver_elb.public_dns
+  value = aws_elb.webserver_elb.dns_name
 }
