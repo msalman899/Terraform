@@ -8,3 +8,7 @@ bucket_name_prefix="dummy123"
 environment_tag="DEV"
 billing_code_tag="ACT123456"
 aws_az=["us-east-1a","us_east-1b"]
+arm_subscription_id="1234"
+arm_principal="1234"
+arm_password="1234"
+tenant_id="1234"
