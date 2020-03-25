@@ -12,7 +12,13 @@ variable "subnet_count" {}
 variable "bucket_name_prefix" {}
 variable "environment_tag" {}
 variable "billing_code_tag" {}
-
+#Azure vars
+variable "arm_subscription_id" {}
+variable "arm_principal" {}
+variable "arm_password" {}
+variable "tenant_id" {}
+variable "dns_zone_name" {}
+variable "dns_resource_group" {}
 
 ############
 ## PROVIDERS
@@ -22,6 +28,14 @@ provider "aws" {
         access_key = var.aws_access_key
         secret_key = var.aws_secret_key
         region = var.aws_region
+}
+
+provider "azurerm" {
+  subscription_id = var.arm_subscription_id
+  client_id       = var.arm_principal
+  client_secret   = var.arm_password
+  tenant_id       = var.tenant_id
+  alias           = "arm-1"
 }
 
 
@@ -335,6 +349,18 @@ resource "aws_instance" "nginx_server" {
                 ]
         }
 
+}
+
+# Azure RM DNS #
+resource "azurerm_dns_cname_record" "elb" {
+    name                = "${var.environment_tag}-website"
+    zone_name           = var.dns_zone_name
+    resource_group_name = var.dns_resource_group
+    ttl                 = "30"
+    record              = aws_elb.web.dns_name
+    provider            = azurerm.arm-1
+
+    tags = merge(local.common_tags, { Name = "${var.environment_tag}-website" })
 }
 
 ############
